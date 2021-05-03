@@ -10,7 +10,15 @@ class MainModel extends ChangeNotifier{
     list = ['禅院','十種影法師'];
     print(list);
     print('もでもで');
+
+    //
     notifyListeners();
   }
 
+  void changeList() {
+    list = ['無下限呪術','六眼','無量空処'];
+    print(list);
+    print('ぽよ');
+    notifyListeners();
+  }
 }

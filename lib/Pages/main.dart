@@ -5,6 +5,8 @@ import 'package:training_flutter_app/model/main_model.dart';
 
 void main() => runApp(MyApp());
 
+
+//リストページのUIについて定めたページ
 class MyApp extends StatelessWidget {
 
   @override
@@ -22,12 +24,25 @@ class MyApp extends StatelessWidget {
             ),
             //リストを増殖させるためのやつ
             body: Consumer<MainModel>(builder: (context, model, child) {
-              return ListView.builder(
-                itemCount: model.list.length,
-                  itemBuilder:(BuildContext context, int index) {
-                  return _listItem(model.list[index], context);
+              return Column(
+                children: [
+                  Text(model.list[0]),
+                  RaisedButton(onPressed: (){
+                    model.changeListText();
                   }
+                  ),
+                  FlatButton(onPressed: (){
+                    model.changeList();
+              }, child: Text("lplplplp")),
+                ],
               );
+
+              //   ListView.builder(
+              //   itemCount: model.list.length,
+              //     itemBuilder:(BuildContext context, int index) {
+              //     return _listItem(model.list[index], context);
+              //     }
+              // );
             }
             ),
 
@@ -41,7 +56,7 @@ class MyApp extends StatelessWidget {
                   //   context,
                   //   MaterialPageRoute(builder: (context) => AddMemo()),
                   // );
-                  final model = MainModel();
+                  MainModel model = MainModel();
                   model.changeListText();
                   print("タップされました");
                 },
@@ -51,30 +66,27 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
   //リストが何かを指定している
   Widget _listItem(String title, BuildContext context){
-    return Consumer <MainModel>(builder: (context, model, child){
-      return Container(
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 1.0, color: Colors.grey),),
-        ),
-        child: ListTile(
-          title: Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1.0, color: Colors.grey),),
+      ),
+      child: ListTile(
+        title: Text(
+          title,
+          style: TextStyle(
+            color: Colors.black,
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddMemo()),
-            );
-            print("タップされました");
-          },
         ),
-      );
-  });
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddMemo()),
+          );
+          print("タップされました");
+        },
+      ),
+    );
   }
 }
